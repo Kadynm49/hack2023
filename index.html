@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>URL Submission Form</h2>
+
+    <form id="urlForm">
+      <label for="url">URL:</label><br />
+      <input type="text" id="url" name="url" /><br />
+      <input type="submit" value="Submit" />
+    </form>
+
+    <p id="response"></p>
+
+    <script>
+      document
+        .getElementById("urlForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          var url = document.getElementById("url").value;
+
+          fetch("https://podcast-summary.azurewebsites.net/api/summarize", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ url: url }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              document.getElementById("response").innerText =
+                JSON.stringify(data);
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              document.getElementById("response").innerText = "Error: " + error;
+            });
+        });
+    </script>
+  </body>
+</html>
