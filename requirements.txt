@@ -1,0 +1,6 @@
+azure-functions
+youtube_dl
+openai
+azure-storage-blob
+azure-mgmt-storage
+azure-cognitiveservices-speech
